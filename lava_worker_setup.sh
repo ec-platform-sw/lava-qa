@@ -20,6 +20,7 @@ sed -i 's/# URL.*/URL="http:\/\/192.168.3.198"/' /etc/lava-dispatcher/lava-worke
 sed -i 's/TOKEN.*/TOKEN="--token '$lava_token'"/' /etc/lava-dispatcher/lava-worker
 sudo service lava-worker restart
 sudo apt install ser2net
+sed -i '/^.00.*/,$s/^/#/'  /etc/ser2net.conf
 echo "5001:telnet:0:/dev/serial/by-id/usb-FTDI_USB__-__Serial_Converter_EQ-JT1-if03-port0:115200 8DATABITS NONE 1STOPBIT LOCAL edgeq-raptor2 max-connections=10" >> /etc/ser2net.conf
 echo "5002:telnet:0:/dev/serial/by-id/usb-FTDI_USB__-__Serial_Converter_EQ-JT1-if02-port0:115200 8DATABITS NONE 1STOPBIT LOCAL edgeq-raptor2 max-connections=10" >> /etc/ser2net.conf
 echo "2000:telnet:600:/dev/ttyS0:9600 8DATABITS NONE 1STOPBIT banner" >> /etc/ser2net.conf
@@ -27,4 +28,6 @@ echo "3000:telnet:600:/dev/ttyS0:19200 8DATABITS NONE 1STOPBIT banner" >> /etc/s
 echo "3001:telnet:600:/dev/ttyS1:19200 8DATABITS NONE 1STOPBIT banner" >> /etc/ser2net.conf
 sudo /etc/init.d/ser2net restart
 sudo /etc/init.d/ser2net restart
+
+###after ser2net restart do reboot by below command
 #sudo reboot
